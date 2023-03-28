@@ -1,0 +1,50 @@
+{% extends 'base/base.html' %}
+{% load i18n %}
+{% load widget_tweaks %}
+
+{% block title %}{% trans "Sign up" %}{% endblock title %}
+{% block content %}
+<div class="columns is-centered">
+<div class="column is-half">
+  <form method="post" action="">
+    {% trans "Sign up" as sing_up %}
+    <h2 class="title has-text-centered">{{ sing_up }}</h2>
+    {% csrf_token %}
+
+    {% if form.non_field_errors %}
+    <article class="message is-danger">
+      <div class="message-body">
+        {{ form.non_field_errors }}
+      </div>
+    </article>
+    {% endif %}
+
+    {% for field in form %}
+    <div class="field">
+      <div class="control">
+        {{ field|add_label_class:'label' }}
+        {% if form.is_bound %}
+          {% if field.errors %}
+            {{ field|add_class:'input'|add_error_class:"is-danger" }}
+            {% for error in field.errors %}
+            <p class="help is-danger">{{ error }}</p>
+            {% endfor %}
+          {% else %}
+          {{ field|add_class:'input is-success' }}
+          {% endif %}
+        {% else %}
+          {{ field|add_class:'input' }}
+        {% endif %}
+      </div>
+    </div>
+    {% endfor %}
+
+    <div class="field">
+      <p class="control has-text-centered">
+        <button class="button is-success">{{ sing_up }}</button>
+      </p>
+    </div>
+  </form>
+</div>
+</div>
+{% endblock %}

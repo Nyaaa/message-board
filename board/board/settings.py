@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'boardapp',
     'users',
     'django_filters',
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [

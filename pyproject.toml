@@ -11,6 +11,7 @@ django = "^4.1.7"
 django-filter = "^23.1"
 python-dotenv = "^1.0.0"
 django-modeltranslation = "^0.18.9"
+django-widget-tweaks = "^1.4.12"
 
 
 [tool.poetry.group.dev.dependencies]
