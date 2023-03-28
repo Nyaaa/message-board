@@ -8,6 +8,7 @@ from django.shortcuts import redirect, get_object_or_404
 from django.contrib import messages
 from django.utils.translation import gettext_lazy as _
 from django.http import HttpResponseRedirect
+from django.contrib.sites.models import Site
 
 
 class SignUpView(CreateView):
@@ -19,17 +20,16 @@ class SignUpView(CreateView):
         user.is_active = False
         user.save()
         token = Token.objects.create(user=user)
+        domain = Site.objects.get_current().domain
         url = reverse_lazy('activate', args=[user.pk])
-
-        subject = 'Activate Your MySite Account'
+        subject = _('Activate your account')
         message = render_to_string('users/activation_email.html', {
             'user': user,
             'token': token.value,
-            'url': url,
+            'url': domain + url,
         })
         user.email_user(subject, message)
-
-        # super(SignUpView, self).form_valid(form)
+        messages.success(self.request, _('Activation code sent to your e-mail.'))
         return redirect(url)
 
 
