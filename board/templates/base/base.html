@@ -14,6 +14,22 @@
 {% include 'base/navbar.html' %}
 {% block body %}
 <div class="container">
+
+  {% if messages %}
+  <ul class="messages">
+    {% for message in messages %}
+    <article class="message
+    {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}is-danger
+    {% elif message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}is-success
+    {% endif %}">
+      <div class="message-body">
+        {{ message }}
+      </div>
+    </article>
+    {% endfor %}
+  </ul>
+  {% endif %}
+
 {% block content %}
 {% endblock content %}
 </div>

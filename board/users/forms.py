@@ -18,3 +18,10 @@ class SignUpForm(UserCreationForm):
             'password1',
             'password2',
         ]
+
+
+class ActivationForm(forms.Form):
+    activation_code = forms.IntegerField()
+
+    class Meta:
+        model = get_user_model()

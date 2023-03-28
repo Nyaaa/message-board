@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
     'boardapp',
     'users',
     'django_filters',
@@ -152,3 +153,5 @@ SITE_ID = 1
 LOGIN_URL = reverse_lazy('login')
 LOGOUT_REDIRECT_URL = reverse_lazy('login')
 LOGIN_REDIRECT_URL = reverse_lazy('home')
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

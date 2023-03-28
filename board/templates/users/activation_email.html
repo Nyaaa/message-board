@@ -1,0 +1,9 @@
+{% autoescape off %}
+Hi {{ user.username }},
+
+Please enter the code below to confirm your registration:
+
+{{ token }}
+
+{{ url }}
+{% endautoescape %}
