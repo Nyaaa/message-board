@@ -46,8 +46,11 @@
         <div class="content">{{ post.text }}</div>
       </div>
       <footer class="card-footer">
+        {% block card-action %}
         <p class="card-footer-item">{{ post.date }}</p>
-        <a href="#" class="card-footer-item">{{ post.category }}</a>
+        <a href="{% url 'reply_create' post=post.pk %}" class="card-footer-item">{% trans "Reply" %}</a>
+        <a href="?{% url_replace category=post.category.pk %}" class="card-footer-item">{{ post.category }}</a>
+        {% endblock card-action %}
       </footer>
     </div>
   {% endfor %}

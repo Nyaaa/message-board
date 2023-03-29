@@ -33,11 +33,10 @@ class Comment(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE, verbose_name=_('Post'))
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name=_('Author'))
     created = models.DateTimeField(auto_now_add=True, verbose_name=_('Date'))
-    title = models.CharField(max_length=255, verbose_name=_('Title'))
     text = models.TextField(verbose_name=_('Text'))
 
     def __str__(self):
-        return f'{self.title}'
+        return f'{self.text}'
 
     class Meta:
         verbose_name = _('Comment')

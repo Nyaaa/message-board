@@ -18,6 +18,7 @@ django-widget-tweaks = "^1.4.12"
 django-stubs = "^1.16.0"
 coverage = "^7.2.2"
 model-bakery = "^1.10.1"
+faker = "^18.3.1"
 
 [build-system]
 requires = ["poetry-core"]
