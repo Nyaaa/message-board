@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.db import models
+from tinymce import models as tinymce_models
 from django.utils.translation import gettext_lazy as _
 
 
@@ -17,7 +18,7 @@ class Category(models.Model):
 class Post(models.Model):
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name=_('Name'))
     title = models.CharField(max_length=255, verbose_name=_('Title'))
-    text = models.TextField(verbose_name=_('Text'))
+    text = tinymce_models.HTMLField(verbose_name=_('Text'))
     category = models.ForeignKey(Category, on_delete=models.RESTRICT, verbose_name=_('Category'))
     date = models.DateTimeField(auto_now_add=True, verbose_name=_('Date'))
     archived = models.BooleanField(default=False)

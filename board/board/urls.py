@@ -21,4 +21,5 @@ urlpatterns = [
     path('', include('boardapp.urls')),
     path('user/', include('users.urls')),
     path('i18n/', include('django.conf.urls.i18n')),
+    path('tinymce/', include('tinymce.urls')),
 ]

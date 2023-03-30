@@ -39,6 +39,7 @@ class PostCreate(SuccessMessageMixin, LoginRequiredMixin, CreateView):
     model = Post
     template_name = 'post_edit.html'
     success_message = _('Post "%(title)s" was created successfully.')
+    success_url = reverse_lazy('home')
 
     def form_valid(self, form):
         post = form.save(commit=False)
@@ -51,6 +52,7 @@ class PostUpdate(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
     model = Post
     template_name = 'post_edit.html'
     success_message = _('Post "%(title)s" was updated successfully.')
+    success_url = reverse_lazy('home')
 
 
 class PostDelete(SuccessMessageMixin, LoginRequiredMixin, DeleteView):

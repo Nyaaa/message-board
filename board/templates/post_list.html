@@ -14,9 +14,9 @@
       <header class="card-header">
         <p class="card-header-title">{{ post.title }}</p>
       </header>
-      <div class="card-content">
+      <div class="card-content pb-2">
         <div class="content">
-          <p>{{ post.text }}</p>
+          <p>{{ post.text|safe }}</p>
           <p class="has-text-right is-size-7">{{ post.author }} | {{ post.date }}</p>
         </div>
       </div>
