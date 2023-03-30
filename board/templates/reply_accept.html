@@ -1,0 +1,23 @@
+{% extends 'base/base.html' %}
+{% load i18n %}
+
+{% block title %}{% trans "Accept" %}{% endblock title %}
+
+{% block content %}
+<div class="columns is-centered">
+  <div class="column is-half">
+    <h1 class="title has-text-centered">{% trans "Accept" %}</h1>
+    <hr>
+    <form class="text-center has-text-centered" action="" method="post">
+      {% csrf_token %}
+      <div class="content">
+        <p>{% blocktranslate %}Do you really want to accept "{{ object }}"?
+          Post will be archived.{% endblocktranslate %}</p>
+      </div>
+      <button type="submit" class="button is-success">{% trans "Accept" context "button" %}</button>
+      <a href="{{ request.META.HTTP_REFERER|escape }}" class="button">{% trans "Cancel" %}</a>
+    </form>
+  </div>
+</div>
+
+{% endblock content %}

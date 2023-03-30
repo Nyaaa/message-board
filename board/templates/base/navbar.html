@@ -20,6 +20,8 @@
       {% if user.is_authenticated %}
       <a href="{% url 'user_posts' %}" class="navbar-item">
         {% trans "My posts" %}</a>
+      <a href="{% url 'replies' %}?accepted=false" class="navbar-item">
+        {% trans "Replies" %}</a>
       {% endif %}
       </div>
     </div>

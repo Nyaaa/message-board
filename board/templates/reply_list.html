@@ -1,0 +1,57 @@
+{% extends 'base/base.html' %}
+{% load i18n %}
+{% load custom_filters %}
+
+{% block content %}
+{% include 'base/filter.html' %}
+
+<div class="columns is-centered">
+  <div class="is-justify-content-center">
+    {% if object_list %}
+      <table class="table is-hoverable is-justify-content-center" aria-labelledby="replies">
+        <thead>
+        <tr>
+          <th>{% trans "Post" %}</th>
+          <th>{% trans "Text" %}</th>
+          <th>{% trans "User" %}</th>
+          <th>{% trans "Date" %}</th>
+          <th></th>
+          <th></th>
+        </tr>
+        </thead>
+        {% for reply in object_list %}
+        <tr>
+          <td>{{ reply.post }}</td>
+          <td>{{ reply.text }}</td>
+          <td>{{ reply.author }}</td>
+          <td>{{ reply.created }}</td>
+          <td>
+            {% if not reply.accepted %}
+            <a href="{% url 'reply_accept' pk=reply.pk %}">
+              <span class="tag is-success">
+                <i class="bi bi-check-lg"></i>
+              </span>
+            </a>
+            {% else %}
+            <span class="tag is-success is-light">
+                <i class="bi bi-check-lg"></i>
+              </span>
+            {% endif %}
+          </td>
+          <td>
+            <a href="{% url 'reply_delete' pk=reply.pk %}">
+              <span class="tag is-danger">
+                <i class="bi bi-trash3"></i>
+              </span>
+            </a>
+          </td>
+        </tr>
+      {% endfor %}
+      </table>
+    {% else %}
+    <h2>{% trans "Nothing here!" %}</h2>
+    {% endif %}
+    {% include 'base/paginator.html' %}
+  </div>
+</div>
+{% endblock content %}

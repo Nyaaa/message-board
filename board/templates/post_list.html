@@ -1,41 +1,13 @@
 {% extends 'base/base.html' %}
 {% load i18n %}
-{% load widget_tweaks %}
 {% load custom_filters %}
 
 {% block content %}
+{% include 'base/filter.html' %}
+
+<!--content-->
 <div class="columns is-centered">
   <div class="column is-half">
-
-<!--    filter-->
-{% if filter %}
-<form class="mb-5" action="" method="get">
-  <div class="input-group">
-    {% for field in filter.form %}
-    <div class="select">{{ field }}</div>
-    {% endfor %}
-    {% if filter.is_bound %}
-    {% translate "Clear" as clear %}
-    <a href="{% url request.resolver_match.view_name %}" class="button"
-       title="{{ clear }}">
-      <span class="icon-text">
-        <span class="icon"><i class="bi bi-backspace"></i></span>
-        <span>{{ clear }}</span>
-      </span>
-    </a>
-    {% endif %}
-    {% translate "Filter" as filter %}
-    <button type="submit" class="button" title="{{ filter }}">
-      <span class="icon-text">
-        <span class="icon"><i class="bi bi-funnel"></i></span>
-        <span>{{ filter }}</span>
-      </span>
-    </button>
-  </div>
-</form>
-{% endif %}
-<!--    filter-->
-<!--content-->
 {% if object_list %}
   {% for post in object_list %}
     <div class="card mb-5">
@@ -43,13 +15,29 @@
         <p class="card-header-title">{{ post.title }}</p>
       </header>
       <div class="card-content">
-        <div class="content">{{ post.text }}</div>
+        <div class="content">
+          <p>{{ post.text }}</p>
+          <p class="has-text-right is-size-7">{{ post.author }} | {{ post.date }}</p>
+        </div>
       </div>
       <footer class="card-footer">
         {% block card-action %}
-        <p class="card-footer-item">{{ post.date }}</p>
+        {% if post.author == user %}
+        <a href="{% url 'replies' %}?post={{ post.pk }}" class="card-footer-item">{% trans "Replies" %}</a>
+        {% if not post.archived %}
+        <a href="{% url 'post_edit' pk=post.pk %}" class="card-footer-item">{% trans "Edit" %}</a>
+        {% else %}
+        <p class="card-footer-item">
+        <span class="tag">{% trans "Archived" %}</span>
+        </p>
+        {% endif %}
+        <a href="{% url 'post_delete' pk=post.pk %}" class="card-footer-item">{% trans "Delete" %}</a>
+        {% else %}
         <a href="{% url 'reply_create' post=post.pk %}" class="card-footer-item">{% trans "Reply" %}</a>
-        <a href="?{% url_replace category=post.category.pk %}" class="card-footer-item">{{ post.category }}</a>
+        {% endif %}
+        <a href="?{% url_replace category=post.category.pk %}" class="card-footer-item">
+          <span class="tag">{{ post.category }}</span>
+        </a>
         {% endblock card-action %}
       </footer>
     </div>
@@ -58,38 +46,7 @@
   <h2>{% trans "Nothing here!" %}</h2>
 {% endif %}
 <!--    content-->
-<!--    pagination-->
-<nav class="pagination is-centered" role="navigation" aria-label="pagination">
-  {% if page_obj.has_previous %}
-  <a href="?{% url_replace page=page_obj.previous_page_number %}" class="pagination-previous">
-    {% trans "Previous" %}</a>
-  {% else %}
-  <a class="pagination-previous is-disabled">{% trans "Previous" %}</a>
-  {% endif %}
-  <ul class="pagination-list">
-    {% if page_obj.has_previous %}
-    <li><a href="?{% url_replace page=1 %}" class="pagination-link">1</a></li>
-    <li><span class="pagination-ellipsis">&hellip;</span></li>
-    <li><a href="?{% url_replace page=page_obj.previous_page_number %}" class="pagination-link" aria-label="Goto page 45">
-      {{ page_obj.previous_page_number }}</a></li>
-    {% endif %}
-    <li><a class="pagination-link is-current" aria-current="page">
-      {{ page_obj.number }}</a></li>
-    {% if page_obj.has_next %}
-    <li><a href="?{% url_replace page=page_obj.next_page_number %}" class="pagination-link">
-      {{ page_obj.next_page_number }}</a></li>
-    <li><span class="pagination-ellipsis">&hellip;</span></li>
-    <li><a href="?page={{ page_obj.paginator.num_pages }}" class="pagination-link">
-      {{ page_obj.paginator.num_pages }}</a></li>
-    {% endif %}
-  </ul>
-  {% if page_obj.has_next %}
-  <a href="?{% url_replace page=page_obj.next_page_number %}" class="pagination-next">{% trans "Next" %}</a>
-  {% else %}
-  <a class="pagination-next is-disabled">{% trans "Next" %}</a>
-  {% endif %}
-</nav>
-<!--    pagination-->
+    {% include 'base/paginator.html' %}
   </div>
 </div>
 {% endblock content %}

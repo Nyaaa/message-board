@@ -122,6 +122,8 @@ TIME_ZONE = 'UTC'
 
 USE_I18N = True
 
+USE_L10N = False
+
 USE_TZ = True
 
 LOCALE_PATHS = [
@@ -132,6 +134,9 @@ LANGUAGES = [
     ('en', 'English'),
     ('ru', 'Russian'),
 ]
+
+DATETIME_FORMAT = 'Y-m-d, H:i'
+SHORT_DATETIME_FORMAT = 'Y-m-d'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/

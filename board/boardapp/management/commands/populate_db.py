@@ -26,4 +26,12 @@ class Command(BaseCommand):
             author=random.choice([u1, u2])
         ) for _ in range(posts)], ignore_conflicts=True)
 
+        posts = Post.objects.all()
+
+        Comment.objects.bulk_create([Comment(
+            text=fake.paragraph(nb_sentences=1),
+            post=random.choice(posts),
+            author=random.choice([u1, u2])
+        ) for _ in range(100)], ignore_conflicts=True)
+
         self.stdout.write(self.style.SUCCESS('Successfully populated the database.'))

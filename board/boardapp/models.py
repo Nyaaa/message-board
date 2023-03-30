@@ -20,6 +20,7 @@ class Post(models.Model):
     text = models.TextField(verbose_name=_('Text'))
     category = models.ForeignKey(Category, on_delete=models.RESTRICT, verbose_name=_('Category'))
     date = models.DateTimeField(auto_now_add=True, verbose_name=_('Date'))
+    archived = models.BooleanField(default=False)
 
     def __str__(self):
         return f'{self.title}'
@@ -34,6 +35,7 @@ class Comment(models.Model):
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name=_('Author'))
     created = models.DateTimeField(auto_now_add=True, verbose_name=_('Date'))
     text = models.TextField(verbose_name=_('Text'))
+    accepted = models.BooleanField(default=False)
 
     def __str__(self):
         return f'{self.text}'
