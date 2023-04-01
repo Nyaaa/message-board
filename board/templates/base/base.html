@@ -17,18 +17,15 @@
 <div class="container">
 
   {% if messages %}
-  <ul class="messages">
     {% for message in messages %}
-    <article class="message
+    <div class="notification
     {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}is-danger
     {% elif message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}is-success
-    {% endif %}">
-      <div class="message-body">
+    {% endif %} is-light">
+      <button class="delete"></button>
         {{ message }}
-      </div>
-    </article>
+    </div>
     {% endfor %}
-  </ul>
   {% endif %}
 
 {% block content %}
