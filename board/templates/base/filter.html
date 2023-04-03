@@ -3,13 +3,14 @@
 <form class="my-5" action="" method="get">
   <div class="level is-justify-content-center">
     {% for field in filter.form %}
-    <div class="level-item is-flex-grow-0 mx-1">
+    <div class="column m-0 p-0 level-item is-flex-grow-0 mx-1">
+      <label class="label">{{ field.label }}</label>
       <div class="select">{{ field }}</div>
     </div>
     {% endfor %}
     {% if filter.is_bound %}
     {% translate "Clear" as clear %}
-    <div class="level-item is-flex-grow-0 mx-1">
+    <div class="is-align-self-flex-end level-item is-flex-grow-0 mx-1">
       <a href="{% url request.resolver_match.view_name %}" class="button"
          title="{{ clear }}">
         <span class="icon-text">
@@ -20,7 +21,7 @@
     </div>
     {% endif %}
     {% translate "Filter" as filter %}
-    <div class="level-item is-flex-grow-0 mx-1">
+    <div class="is-align-self-flex-end level-item is-flex-grow-0 mx-1">
       <button type="submit" class="button" title="{{ filter }}">
         <span class="icon-text">
           <span class="icon"><i class="bi bi-funnel"></i></span>

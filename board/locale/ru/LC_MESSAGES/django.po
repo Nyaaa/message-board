@@ -3,62 +3,229 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-27 14:21+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"POT-Creation-Date: 2023-04-03 13:55+0000\n"
+"PO-Revision-Date: 2023-04-03 16:56+0300\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || "
 "(n%100>=11 && n%100<=14)? 2 : 3);\n"
-#: boardapp/models.py:7 boardapp/models.py:18
+"X-Generator: Poedit 3.2.2\n"
+
+#: boardapp/models.py:8 boardapp/models.py:19
 msgid "Name"
-msgstr ""
+msgstr "Название"
 
-#: boardapp/models.py:13 boardapp/models.py:21
+#: boardapp/models.py:14 boardapp/models.py:22
 msgid "Category"
-msgstr ""
+msgstr "Категория"
 
-#: boardapp/models.py:14
-msgid "categories"
-msgstr ""
+#: boardapp/models.py:15
+msgid "Сategories"
+msgstr "Категории"
 
-#: boardapp/models.py:19 boardapp/models.py:36
+#: boardapp/models.py:20
 msgid "Title"
-msgstr ""
+msgstr "Заголовок"
 
-#: boardapp/models.py:20 boardapp/models.py:37
+#: boardapp/models.py:21 boardapp/models.py:38 templates/reply_list.html:15
 msgid "Text"
-msgstr ""
+msgstr "Текст"
 
-#: boardapp/models.py:22 boardapp/models.py:35
+#: boardapp/models.py:23 boardapp/models.py:37 templates/reply_list.html:17
 msgid "Date"
-msgstr ""
+msgstr "Дата"
 
-#: boardapp/models.py:28 boardapp/models.py:33
+#: boardapp/models.py:30 boardapp/models.py:35 templates/reply_list.html:14
 msgid "Post"
-msgstr ""
+msgstr "Пост"
 
-#: boardapp/models.py:29
+#: boardapp/models.py:31
 msgid "Posts"
-msgstr ""
+msgstr "Посты"
 
-#: boardapp/models.py:34
+#: boardapp/models.py:36
 msgid "Author"
-msgstr ""
+msgstr "Автор"
 
-#: boardapp/models.py:43
+#: boardapp/models.py:39
+msgid "Accepted"
+msgstr "Принято"
+
+#: boardapp/models.py:45
 msgid "Comment"
-msgstr ""
+msgstr "Комментарий"
 
-#: boardapp/models.py:44
+#: boardapp/models.py:46
 msgid "Comments"
+msgstr "Комментарии"
+
+#: boardapp/views.py:42
+#, python-format
+msgid "Post \"%(title)s\" was created successfully."
+msgstr "Пост \"%(title)s\" успешно создан."
+
+#: boardapp/views.py:52 templates/base/navbar.html:29
+msgid "New post"
+msgstr "Новый пост"
+
+#: boardapp/views.py:61
+#, python-format
+msgid "Post \"%(title)s\" was updated successfully."
+msgstr "Пост \"%(title)s\" успешно обновлён."
+
+#: boardapp/views.py:66
+msgid "Edit post"
+msgstr "Редактировать пост"
+
+#: boardapp/views.py:75
+msgid "Post deleted."
+msgstr "Пост удалён."
+
+#: boardapp/views.py:82
+msgid "Reply sent."
+msgstr "Отклик отправлен."
+
+#: boardapp/views.py:93
+msgid "New reply"
+msgstr "Новый отклик"
+
+#: boardapp/views.py:114
+msgid "Reply deleted."
+msgstr "Отклик удалён."
+
+#: boardapp/views.py:122
+msgid "Reply accepted."
+msgstr "Отклик принят."
+
+#: templates/base/filter.html:12
+msgid "Clear"
+msgstr "Очистить"
+
+#: templates/base/filter.html:23
+msgid "Filter"
+msgstr "Отфильтровать"
+
+#: templates/base/navbar.html:18
+msgid "Home"
+msgstr "Главная"
+
+#: templates/base/navbar.html:22
+msgid "My posts"
+msgstr "Мои посты"
+
+#: templates/base/navbar.html:24 templates/post_list.html:26
+msgid "Replies"
+msgstr "Отклики"
+
+#: templates/base/navbar.html:38
+msgid "Hello"
+msgstr "Привет"
+
+#: templates/base/navbar.html:64 templates/users/signup.html:5
+#: templates/users/signup.html:10
+msgid "Sign up"
+msgstr "Зарегистрироваться"
+
+#: templates/base/navbar.html:65 templates/users/login.html:5
+#: templates/users/login.html:11
+msgid "Sign in"
+msgstr "Войти"
+
+#: templates/base/navbar.html:67
+msgid "Sign out"
+msgstr "Выйти"
+
+#: templates/base/paginator.html:6 templates/base/paginator.html:8
+msgid "Previous"
+msgstr "Назад"
+
+#: templates/base/paginator.html:29 templates/base/paginator.html:31
+msgid "Next"
+msgstr "Далее"
+
+#: templates/post_delete.html:4 templates/post_delete.html:9
+#: templates/post_list.html:34
+msgid "Delete"
+msgstr "Удалить"
+
+#: templates/post_delete.html:14
+#, python-format
+msgid "Do you really want to delete \"%(object)s\"?"
+msgstr "Вы действительно хотите удалить \"%(object)s\"?"
+
+#: templates/post_delete.html:16
+msgctxt "button"
+msgid "Delete"
+msgstr "Удалить"
+
+#: templates/post_delete.html:17 templates/reply_accept.html:18
+msgid "Cancel"
+msgstr "Отмена"
+
+#: templates/post_edit.html:44
+msgid "Save"
+msgstr "Сохранить"
+
+#: templates/post_list.html:28
+msgid "Edit"
+msgstr "Редактировать"
+
+#: templates/post_list.html:31
+msgid "Archived"
+msgstr "Архив"
+
+#: templates/post_list.html:37
+msgctxt "button"
+msgid "Reply"
+msgstr "Откликнуться"
+
+#: templates/post_list.html:47 templates/reply_list.html:52
+msgid "Nothing here!"
+msgstr "Пусто!"
+
+#: templates/reply_accept.html:4 templates/reply_accept.html:9
+msgid "Accept"
+msgstr "Принять"
+
+#: templates/reply_accept.html:14
+#, python-format
+msgid ""
+"Do you really want to accept \"%(object)s\"?\n"
+"          Post will be archived."
 msgstr ""
+"Вы действительно хотите принять \"%(object)s\"?\n"
+"          Пост будет отправлен в архив."
+
+#: templates/reply_accept.html:17
+msgctxt "button"
+msgid "Accept"
+msgstr "Принять"
+
+#: templates/reply_list.html:16
+msgid "User"
+msgstr "Пользователь"
+
+#: users/views.py:25
+msgid "Activate your account"
+msgstr "Активировать аккаунт"
+
+#: users/views.py:32
+msgid "Activation code sent to your e-mail."
+msgstr "Код активации отправлен на вашу электронную почту."
+
+#: users/views.py:48
+msgid "Account activated."
+msgstr "Аккаунт активирован."
+
+#: users/views.py:51
+msgid "Activation code is incorrect."
+msgstr "Неверный код активации."

@@ -12,7 +12,7 @@ class Category(models.Model):
 
     class Meta:
         verbose_name = _('Category')
-        verbose_name_plural = _('categories')
+        verbose_name_plural = _('Сategories')
 
 
 class Post(models.Model):
@@ -36,7 +36,7 @@ class Comment(models.Model):
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name=_('Author'))
     created = models.DateTimeField(auto_now_add=True, verbose_name=_('Date'))
     text = models.TextField(verbose_name=_('Text'))
-    accepted = models.BooleanField(default=False)
+    accepted = models.BooleanField(default=False, verbose_name=_('Accepted'))
 
     def __str__(self):
         return f'{self.text}'

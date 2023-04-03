@@ -23,6 +23,13 @@
       <a href="{% url 'replies' %}?accepted=false" class="navbar-item">
         {% trans "Replies" %}</a>
       {% endif %}
+      <div class="navbar-item">
+          <p class="control">
+            <a class="button is-primary" href="{% url 'post_create' %}">
+              <span>{% trans "New post" %}</span>
+            </a>
+          </p>
+      </div>
       </div>
     </div>
 
@@ -30,6 +37,27 @@
       {% if user.is_authenticated %}
       <p class="navbar-item">{% trans "Hello" %}, {{ user }}!</p>
       {% endif %}
+      <!-- Language selector-->
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          <i class="bi bi-translate"></i>
+        </a>
+        <form action="{% url 'set_language' %}" method="post">
+          {% csrf_token %}
+          <input name="next" type="hidden" value="{{ request.get_full_path }}"/>
+          <div class="navbar-dropdown">
+          {% get_available_languages as LANGUAGES %}
+          {% get_language_info_list for LANGUAGES as languages %}
+          {% for language in languages %}
+            <button type="submit" name="language" value="{{ language.code }}"
+                    class="navbar-item button is-text is-fullwidth">
+              {{ language.name_local }}
+            </button>
+          {% endfor %}
+          </div>
+        </form>
+      </div>
+      <!-- Language selector-->
       <div class="navbar-item">
         <div class="buttons">
           {% if not user.is_authenticated %}

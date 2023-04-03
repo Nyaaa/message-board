@@ -33,7 +33,8 @@
         {% endif %}
         <a href="{% url 'post_delete' pk=post.pk %}" class="card-footer-item">{% trans "Delete" %}</a>
         {% else %}
-        <a href="{% url 'reply_create' post=post.pk %}" class="card-footer-item">{% trans "Reply" %}</a>
+        <a href="{% url 'reply_create' post=post.pk %}" class="card-footer-item">
+          {% trans "Reply" context "button" %}</a>
         {% endif %}
         <a href="?{% url_replace category=post.category.pk %}" class="card-footer-item">
           <span class="tag">{{ post.category }}</span>

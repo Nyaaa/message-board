@@ -47,6 +47,11 @@ class PostCreate(SuccessMessageMixin, LoginRequiredMixin, CreateView):
         post.author = self.request.user
         return super(PostCreate, self).form_valid(form)
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = _('New post')
+        return context
+
 
 class PostUpdate(SuccessMessageMixin, ObjectPermissionRequiredMixin, UpdateView):
     form_class = PostForm
@@ -55,6 +60,11 @@ class PostUpdate(SuccessMessageMixin, ObjectPermissionRequiredMixin, UpdateView)
     permission_required = ('boardapp.change_post',)
     success_message = _('Post "%(title)s" was updated successfully.')
     success_url = reverse_lazy('home')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = _('Edit post')
+        return context
 
 
 class PostDelete(SuccessMessageMixin, ObjectPermissionRequiredMixin, DeleteView):
@@ -77,6 +87,11 @@ class CommentCreate(SuccessMessageMixin, LoginRequiredMixin, CreateView):
         post_id = self.kwargs['post']
         comment.post = get_object_or_404(Post, pk=post_id)
         return super(CommentCreate, self).form_valid(form)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = _('New reply')
+        return context
 
 
 class CommentListView(FilterView):
