@@ -44,3 +44,6 @@ class Comment(models.Model):
     class Meta:
         verbose_name = _('Comment')
         verbose_name_plural = _('Comments')
+        permissions = [
+            ('accept_comment', 'Can accept Comment'),
+        ]

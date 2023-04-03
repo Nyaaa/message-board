@@ -8,6 +8,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse_lazy
 from django.shortcuts import redirect, get_object_or_404
+from .mixins import ObjectPermissionRequiredMixin
 
 
 class PostListView(FilterView):
@@ -47,17 +48,19 @@ class PostCreate(SuccessMessageMixin, LoginRequiredMixin, CreateView):
         return super(PostCreate, self).form_valid(form)
 
 
-class PostUpdate(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
+class PostUpdate(SuccessMessageMixin, ObjectPermissionRequiredMixin, UpdateView):
     form_class = PostForm
     model = Post
     template_name = 'post_edit.html'
+    permission_required = ('boardapp.change_post',)
     success_message = _('Post "%(title)s" was updated successfully.')
     success_url = reverse_lazy('home')
 
 
-class PostDelete(SuccessMessageMixin, LoginRequiredMixin, DeleteView):
+class PostDelete(SuccessMessageMixin, ObjectPermissionRequiredMixin, DeleteView):
     model = Post
     template_name = 'post_delete.html'
+    permission_required = ('boardapp.delete_post',)
     success_url = reverse_lazy('home')
     success_message = _('Post deleted.')
 
@@ -88,17 +91,19 @@ class CommentListView(FilterView):
         return qs
 
 
-class CommentDelete(SuccessMessageMixin, LoginRequiredMixin, DeleteView):
+class CommentDelete(SuccessMessageMixin, ObjectPermissionRequiredMixin, DeleteView):
     model = Comment
     template_name = 'post_delete.html'
+    permission_required = ('boardapp.delete_comment',)
     success_url = reverse_lazy('user_posts')
     success_message = _('Reply deleted.')
 
 
-class CommentAccept(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
+class CommentAccept(SuccessMessageMixin, ObjectPermissionRequiredMixin, UpdateView):
     model = Comment
     template_name = 'reply_accept.html'
     success_url = reverse_lazy('replies')
+    permission_required = ('boardapp.accept_comment',)
     success_message = _('Reply accepted.')
     form_class = CommentAcceptForm
 
