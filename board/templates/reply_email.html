@@ -1,0 +1,9 @@
+{% autoescape off %}
+Hi {{ user.username }},
+
+You got a new reply to your post:
+{{ post }}
+{{ reply }}
+
+<a href="{{ url }}">Accept</a>
+{% endautoescape %}

@@ -16,6 +16,7 @@ class PostListView(FilterView):
     filterset_class = PostFilter
     paginate_by = 5
     model = Post
+    ordering = ['date']
 
     def get_queryset(self):
         qs = super().get_queryset()
@@ -28,6 +29,7 @@ class UserPostListView(LoginRequiredMixin, FilterView):
     filterset_class = PostFilter
     paginate_by = 5
     model = Post
+    ordering = ['date']
 
     def get_queryset(self):
         qs = super().get_queryset()
@@ -80,11 +82,12 @@ class CommentCreate(SuccessMessageMixin, LoginRequiredMixin, CreateView):
     model = Comment
     template_name = 'post_edit.html'
     success_message = _('Reply sent.')
-    success_url = reverse_lazy('post_list')
+    success_url = reverse_lazy('home')
 
     def form_valid(self, form):
         comment = form.save(commit=False)
         post_id = self.kwargs['post']
+        comment.author = self.request.user
         comment.post = get_object_or_404(Post, pk=post_id)
         return super(CommentCreate, self).form_valid(form)
 
@@ -99,6 +102,7 @@ class CommentListView(FilterView):
     filterset_class = CommentFilter
     paginate_by = 10
     model = Comment
+    ordering = ['post', 'created']
 
     def get_queryset(self):
         qs = super().get_queryset()
