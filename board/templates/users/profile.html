@@ -1,0 +1,15 @@
+{% extends 'base/base.html' %}
+{% load i18n %}
+
+{% block title %}{% trans "Profile" %}{% endblock title %}
+{% block content %}
+<div class="columns is-centered">
+  <div class="column is-half">
+    <nav class="panel">
+      <p class="panel-heading">{% trans "Profile" %}</p>
+      <a class="panel-block" href="{% url 'password_change' %}">{% trans "Change password" %}</a>
+      <a class="panel-block" href="{% url 'profile_edit' %}">{% trans "Edit profile" %}</a>
+    </nav>
+  </div>
+</div>
+{% endblock %}

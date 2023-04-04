@@ -2,13 +2,18 @@
 {% load i18n %}
 {% load widget_tweaks %}
 
-{% block title %}{% trans "Sign up" %}{% endblock title %}
+{% block title %}
+  {% if not title %}{% trans "Sign in" %}{% else %}{{ title }}{% endif %}
+{% endblock title %}
+
 {% block content %}
 <div class="columns is-centered">
 <div class="column is-half">
   <form method="post" action="">
-    {% trans "Sign up" as sing_up %}
-    <h2 class="title has-text-centered">{{ sing_up }}</h2>
+
+    <h2 class="title has-text-centered">
+      {% if not title %}{% trans "Sign in" %}{% else %}{{ title }}{% endif %}
+    </h2>
     {% csrf_token %}
 
     {% if form.non_field_errors %}
@@ -41,7 +46,9 @@
 
     <div class="field">
       <p class="control has-text-centered">
-        <button class="button is-success">{{ sing_up }}</button>
+        <button class="button is-success">
+          {% if not title %}{% trans "Sign in" %}{% else %}{{ title }}{% endif %}
+        </button>
       </p>
     </div>
   </form>

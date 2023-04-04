@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-03 13:55+0000\n"
-"PO-Revision-Date: 2023-04-03 16:56+0300\n"
+"POT-Creation-Date: 2023-04-04 14:30+0000\n"
+"PO-Revision-Date: 2023-04-04 17:32+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: ru\n"
@@ -68,41 +68,41 @@ msgstr "Комментарий"
 msgid "Comments"
 msgstr "Комментарии"
 
-#: boardapp/views.py:42
+#: boardapp/views.py:44
 #, python-format
 msgid "Post \"%(title)s\" was created successfully."
 msgstr "Пост \"%(title)s\" успешно создан."
 
-#: boardapp/views.py:52 templates/base/navbar.html:29
+#: boardapp/views.py:54 templates/base/navbar.html:29
 msgid "New post"
 msgstr "Новый пост"
 
-#: boardapp/views.py:61
+#: boardapp/views.py:63
 #, python-format
 msgid "Post \"%(title)s\" was updated successfully."
 msgstr "Пост \"%(title)s\" успешно обновлён."
 
-#: boardapp/views.py:66
+#: boardapp/views.py:68
 msgid "Edit post"
 msgstr "Редактировать пост"
 
-#: boardapp/views.py:75
+#: boardapp/views.py:77
 msgid "Post deleted."
 msgstr "Пост удалён."
 
-#: boardapp/views.py:82
+#: boardapp/views.py:84
 msgid "Reply sent."
 msgstr "Отклик отправлен."
 
-#: boardapp/views.py:93
+#: boardapp/views.py:96
 msgid "New reply"
 msgstr "Новый отклик"
 
-#: boardapp/views.py:114
+#: boardapp/views.py:118
 msgid "Reply deleted."
 msgstr "Отклик удалён."
 
-#: boardapp/views.py:122
+#: boardapp/views.py:126
 msgid "Reply accepted."
 msgstr "Отклик принят."
 
@@ -130,13 +130,12 @@ msgstr "Отклики"
 msgid "Hello"
 msgstr "Привет"
 
-#: templates/base/navbar.html:64 templates/users/signup.html:5
-#: templates/users/signup.html:10
+#: templates/base/navbar.html:64 users/views.py:22
 msgid "Sign up"
 msgstr "Зарегистрироваться"
 
-#: templates/base/navbar.html:65 templates/users/login.html:5
-#: templates/users/login.html:11
+#: templates/base/navbar.html:65 templates/users/signup.html:6
+#: templates/users/signup.html:15 templates/users/signup.html:50
 msgid "Sign in"
 msgstr "Войти"
 
@@ -214,18 +213,38 @@ msgstr "Принять"
 msgid "User"
 msgstr "Пользователь"
 
-#: users/views.py:25
+#: templates/users/profile.html:4 templates/users/profile.html:9
+msgid "Profile"
+msgstr "Профиль"
+
+#: templates/users/profile.html:10 users/views.py:69
+msgid "Change password"
+msgstr "Изменить пароль"
+
+#: templates/users/profile.html:11 users/views.py:86
+msgid "Edit profile"
+msgstr "Редактировать профиль"
+
+#: users/views.py:32
 msgid "Activate your account"
 msgstr "Активировать аккаунт"
 
-#: users/views.py:32
+#: users/views.py:39
 msgid "Activation code sent to your e-mail."
 msgstr "Код активации отправлен на вашу электронную почту."
 
-#: users/views.py:48
+#: users/views.py:55
 msgid "Account activated."
 msgstr "Аккаунт активирован."
 
-#: users/views.py:51
+#: users/views.py:58
 msgid "Activation code is incorrect."
 msgstr "Неверный код активации."
+
+#: users/views.py:64
+msgid "Password changed successfully."
+msgstr "Пароль успешно изменён."
+
+#: users/views.py:75
+msgid "Profile saved."
+msgstr "Профиль сохранён."

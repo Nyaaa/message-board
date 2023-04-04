@@ -1,6 +1,6 @@
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, FormView
-from .forms import SignUpForm, ActivationForm
+from django.views.generic import CreateView, FormView, UpdateView
+from .forms import SignUpForm, ActivationForm, EditProfileForm
 from .models import Token
 from django.template.loader import render_to_string
 from django.contrib.auth import get_user_model
@@ -9,11 +9,18 @@ from django.contrib import messages
 from django.utils.translation import gettext_lazy as _
 from django.http import HttpResponseRedirect
 from django.contrib.sites.models import Site
+from django.contrib.auth.views import PasswordChangeView
+from django.contrib.messages.views import SuccessMessageMixin
 
 
 class SignUpView(CreateView):
     form_class = SignUpForm
     template_name = 'users/signup.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = _('Sign up')
+        return context
 
     def form_valid(self, form):
         user = form.save(commit=False)
@@ -52,3 +59,29 @@ class AccountActivationView(FormView):
             return HttpResponseRedirect(self.request.path_info)
 
 
+class ChangePasswordView(SuccessMessageMixin, PasswordChangeView):
+    template_name = 'users/signup.html'
+    success_message = _('Password changed successfully.')
+    success_url = reverse_lazy('profile')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = _('Change password')
+        return context
+
+
+class EditProfileView(SuccessMessageMixin, UpdateView):
+    template_name = 'users/signup.html'
+    success_message = _('Profile saved.')
+    success_url = reverse_lazy('profile')
+    form_class = EditProfileForm
+    model = get_user_model()
+
+    def get_object(self, queryset=None):
+        obj = get_object_or_404(self.model, pk=self.request.user.pk)
+        return obj
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = _('Edit profile')
+        return context

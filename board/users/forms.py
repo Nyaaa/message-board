@@ -10,14 +10,7 @@ class SignUpForm(UserCreationForm):
 
     class Meta:
         model = get_user_model()
-        fields = [
-            'username',
-            'first_name',
-            'last_name',
-            'email',
-            'password1',
-            'password2',
-        ]
+        fields = ['username', 'first_name', 'last_name', 'email', 'password1', 'password2']
 
 
 class ActivationForm(forms.Form):
@@ -25,3 +18,9 @@ class ActivationForm(forms.Form):
 
     class Meta:
         model = get_user_model()
+
+
+class EditProfileForm(forms.ModelForm):
+    class Meta:
+        model = get_user_model()
+        fields = ['username', 'first_name', 'last_name', 'email']

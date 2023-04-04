@@ -35,7 +35,7 @@
 
     <div class="navbar-end">
       {% if user.is_authenticated %}
-      <p class="navbar-item">{% trans "Hello" %}, {{ user }}!</p>
+      <p class="navbar-item">{% trans "Hello" %},&nbsp;<a href="{% url 'profile' %}">{{ user }}</a>!</p>
       {% endif %}
       <!-- Language selector-->
       <div class="navbar-item has-dropdown is-hoverable">
@@ -69,6 +69,5 @@
         </div>
       </div>
     </div>
-  </div>
   </div>
 </nav>
