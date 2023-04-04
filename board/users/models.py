@@ -1,6 +1,7 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 import random
+from django.utils import timezone
 
 
 class User(AbstractUser):
@@ -26,6 +27,8 @@ class Token(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     date = models.DateTimeField(auto_now_add=True)
 
-    def delete_old(self):
-        # TODO
-        raise NotImplementedError
+    @staticmethod
+    def delete_old():
+        time = timezone.now() - timezone.timedelta(hours=3)
+        old = Token.objects.filter(date__lte=time)
+        old.delete()

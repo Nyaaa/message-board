@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'django_filters',
     'widget_tweaks',
     'tinymce',
+    'django_apscheduler',
 ]
 
 MIDDLEWARE = [
