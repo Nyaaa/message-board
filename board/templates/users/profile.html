@@ -1,12 +1,25 @@
 {% extends 'base/base.html' %}
 {% load i18n %}
+{% load tz %}
 
 {% block title %}{% trans "Profile" %}{% endblock title %}
 {% block content %}
+{% get_current_timezone as TIME_ZONE %}
 <div class="columns is-centered">
   <div class="column is-half">
     <nav class="panel">
       <p class="panel-heading">{% trans "Profile" %}</p>
+      <div class="panel-block is-justify-content-space-between">
+        <span>{{ current_time|timezone:TIME_ZONE }}</span>
+        <form class="select" action="" method="POST">
+          {% csrf_token %}
+          <select class="" name="timezone" id="timezone">
+            {% for tz in timezones %}
+            <option value="{{ tz }}" {% if tz == TIME_ZONE %}selected{% endif %}>{{ tz }}</option>
+            {% endfor %}
+          </select>
+        </form>
+      </div>
       <a class="panel-block" href="{% url 'password_change' %}">{% trans "Change password" %}</a>
       <a class="panel-block" href="{% url 'profile_edit' %}">{% trans "Edit profile" %}</a>
     </nav>

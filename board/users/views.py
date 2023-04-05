@@ -1,5 +1,5 @@
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, FormView, UpdateView
+from django.views.generic import CreateView, FormView, UpdateView, TemplateView
 from .forms import SignUpForm, ActivationForm, EditProfileForm
 from .models import Token
 from django.template.loader import render_to_string
@@ -11,6 +11,8 @@ from django.http import HttpResponseRedirect
 from django.contrib.sites.models import Site
 from django.contrib.auth.views import PasswordChangeView
 from django.contrib.messages.views import SuccessMessageMixin
+from django.utils import timezone
+import pytz
 
 
 class SignUpView(CreateView):
@@ -85,3 +87,18 @@ class EditProfileView(SuccessMessageMixin, UpdateView):
         context = super().get_context_data(**kwargs)
         context['title'] = _('Edit profile')
         return context
+
+
+class ProfileView(TemplateView):
+    template_name = 'users/profile.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['current_time'] = timezone.now()
+        context['timezones'] = pytz.common_timezones
+        return context
+
+    @staticmethod
+    def post(request):
+        request.session['django_timezone'] = request.POST['timezone']  # NOSONAR python:S1845
+        return redirect(reverse_lazy('profile'))

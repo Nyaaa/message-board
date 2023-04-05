@@ -16,7 +16,7 @@ class PostListView(FilterView):
     filterset_class = PostFilter
     paginate_by = 5
     model = Post
-    ordering = ['date']
+    ordering = ['-date']
 
     def get_queryset(self):
         qs = super().get_queryset()
@@ -29,7 +29,7 @@ class UserPostListView(LoginRequiredMixin, FilterView):
     filterset_class = PostFilter
     paginate_by = 5
     model = Post
-    ordering = ['date']
+    ordering = ['-date']
 
     def get_queryset(self):
         qs = super().get_queryset()
@@ -102,7 +102,7 @@ class CommentListView(FilterView):
     filterset_class = CommentFilter
     paginate_by = 10
     model = Comment
-    ordering = ['post', 'created']
+    ordering = ['post', '-created']
 
     def get_queryset(self):
         qs = super().get_queryset()
