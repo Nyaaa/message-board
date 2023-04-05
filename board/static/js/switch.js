@@ -11,8 +11,8 @@ $(document).ready(function() {
     $(this).parent('div').remove();
   });
 
-//  profile timezone switch
-  $("#timezone").change(function() {
+//  profile forms switch
+  $(".data-form").change(function() {
     this.form.submit();
   });
 

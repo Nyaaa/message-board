@@ -6,7 +6,7 @@ from apscheduler.triggers.cron import CronTrigger
 from django.core.management.base import BaseCommand
 from django_apscheduler.jobstores import DjangoJobStore
 from django_apscheduler.models import DjangoJobExecution
-from users.models import Token
+from users.tasks import delete_old
 
 logger = logging.getLogger(__name__)
 
@@ -14,10 +14,6 @@ logger = logging.getLogger(__name__)
 def delete_old_job_executions(max_age=604_800):
     """This job deletes all apscheduler job executions older than `max_age` from the database."""
     DjangoJobExecution.objects.delete_old_job_executions(max_age)
-
-
-def delete_old():
-    Token.delete_old()
 
 
 class Command(BaseCommand):

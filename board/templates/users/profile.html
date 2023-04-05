@@ -13,7 +13,7 @@
         <span>{{ current_time|timezone:TIME_ZONE }}</span>
         <form class="select" action="" method="POST">
           {% csrf_token %}
-          <select class="" name="timezone" id="timezone">
+          <select class="data-form" name="timezone" id="timezone">
             {% for tz in timezones %}
             <option value="{{ tz }}" {% if tz == TIME_ZONE %}selected{% endif %}>{{ tz }}</option>
             {% endfor %}
@@ -22,6 +22,15 @@
       </div>
       <a class="panel-block" href="{% url 'password_change' %}">{% trans "Change password" %}</a>
       <a class="panel-block" href="{% url 'profile_edit' %}">{% trans "Edit profile" %}</a>
+      <form class="panel-block" action="" method="POST">
+        {% csrf_token %}
+        <label class="checkbox">
+          <input type="hidden" name="newsletter" value="off">
+          {% trans "Subscribe to our newsletter" %}
+          <input class="data-form" name="newsletter" id="newsletter"
+                 type="checkbox" {% if subscriber %}checked{% endif %}>
+        </label>
+      </form>
     </nav>
   </div>
 </div>

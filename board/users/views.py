@@ -10,6 +10,7 @@ from django.utils.translation import gettext_lazy as _
 from django.http import HttpResponseRedirect
 from django.contrib.sites.models import Site
 from django.contrib.auth.views import PasswordChangeView
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.utils import timezone
 import pytz
@@ -61,7 +62,7 @@ class AccountActivationView(FormView):
             return HttpResponseRedirect(self.request.path_info)
 
 
-class ChangePasswordView(SuccessMessageMixin, PasswordChangeView):
+class ChangePasswordView(SuccessMessageMixin, PasswordChangeView, LoginRequiredMixin):
     template_name = 'users/signup.html'
     success_message = _('Password changed successfully.')
     success_url = reverse_lazy('profile')
@@ -72,7 +73,7 @@ class ChangePasswordView(SuccessMessageMixin, PasswordChangeView):
         return context
 
 
-class EditProfileView(SuccessMessageMixin, UpdateView):
+class EditProfileView(SuccessMessageMixin, UpdateView, LoginRequiredMixin):
     template_name = 'users/signup.html'
     success_message = _('Profile saved.')
     success_url = reverse_lazy('profile')
@@ -89,16 +90,29 @@ class EditProfileView(SuccessMessageMixin, UpdateView):
         return context
 
 
-class ProfileView(TemplateView):
+class ProfileView(TemplateView, LoginRequiredMixin):
     template_name = 'users/profile.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['current_time'] = timezone.now()
         context['timezones'] = pytz.common_timezones
+        context['subscriber'] = self.request.user.subscriber
         return context
 
     @staticmethod
     def post(request):
-        request.session['django_timezone'] = request.POST['timezone']  # NOSONAR python:S1845
+        if 'timezone' in request.POST:  # NOSONAR python:S1845
+            request.session['django_timezone'] = request.POST['timezone']
+        print(request.POST)
+        if 'newsletter' in request.POST:
+            user = request.user
+            newsletter = request.POST['newsletter']
+            print(newsletter)
+            if 'on' in newsletter:
+                print(newsletter)
+                user.subscriber = True
+            else:
+                user.subscriber = False
+            user.save()
         return redirect(reverse_lazy('profile'))

@@ -6,6 +6,7 @@ from django.utils import timezone
 
 class User(AbstractUser):
     activated = models.BooleanField(default=False)
+    subscriber = models.BooleanField(default=False)
 
     def has_perm(self, perm, obj=None):
         if self.is_active and self.is_superuser:

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-05 10:19+0000\n"
-"PO-Revision-Date: 2023-04-04 17:32+0300\n"
+"POT-Creation-Date: 2023-04-05 14:19+0000\n"
+"PO-Revision-Date: 2023-04-05 17:22+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: ru\n"
@@ -134,7 +134,7 @@ msgstr "Отклики"
 msgid "Hello"
 msgstr "Привет"
 
-#: templates/base/navbar.html:64 users/views.py:24
+#: templates/base/navbar.html:64 users/views.py:25
 msgid "Sign up"
 msgstr "Зарегистрироваться"
 
@@ -217,34 +217,38 @@ msgstr "Пользователь"
 msgid "Profile"
 msgstr "Профиль"
 
-#: templates/users/profile.html:23 users/views.py:71
+#: templates/users/profile.html:23 users/views.py:72
 msgid "Change password"
 msgstr "Изменить пароль"
 
-#: templates/users/profile.html:24 users/views.py:88
+#: templates/users/profile.html:24 users/views.py:89
 msgid "Edit profile"
 msgstr "Редактировать профиль"
 
-#: users/views.py:34
+#: templates/users/profile.html:29
+msgid "Subscribe to our newsletter"
+msgstr "Подписаться на нашу рассылку"
+
+#: users/views.py:35
 msgid "Activate your account"
 msgstr "Активировать аккаунт"
 
-#: users/views.py:41
+#: users/views.py:42
 msgid "Activation code sent to your e-mail."
 msgstr "Код активации отправлен на вашу электронную почту."
 
-#: users/views.py:57
+#: users/views.py:58
 msgid "Account activated."
 msgstr "Аккаунт активирован."
 
-#: users/views.py:60
+#: users/views.py:61
 msgid "Activation code is incorrect."
 msgstr "Неверный код активации."
 
-#: users/views.py:66
+#: users/views.py:67
 msgid "Password changed successfully."
 msgstr "Пароль успешно изменён."
 
-#: users/views.py:77
+#: users/views.py:78
 msgid "Profile saved."
 msgstr "Профиль сохранён."
