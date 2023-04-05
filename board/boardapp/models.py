@@ -21,7 +21,7 @@ class Post(models.Model):
     text = tinymce_models.HTMLField(verbose_name=_('Text'))
     category = models.ForeignKey(Category, on_delete=models.RESTRICT, verbose_name=_('Category'))
     date = models.DateTimeField(auto_now_add=True, verbose_name=_('Date'))
-    archived = models.BooleanField(default=False)
+    archived = models.BooleanField(default=False, verbose_name=_('Archived'))
 
     def __str__(self):
         return f'{self.title}'

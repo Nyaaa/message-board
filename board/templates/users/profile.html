@@ -2,7 +2,7 @@
 {% load i18n %}
 {% load tz %}
 
-{% block title %}{% trans "Profile" %}{% endblock title %}
+{% block title %}: {% trans "Profile" %}{% endblock title %}
 {% block content %}
 {% get_current_timezone as TIME_ZONE %}
 <div class="columns is-centered">

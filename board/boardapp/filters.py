@@ -1,15 +1,12 @@
-import django_filters
-from .models import Post, Comment
+from django_filters import FilterSet
+from typing import Type
+from django.db.models import Model
 
 
-class PostFilter(django_filters.FilterSet):
+def filter_factory(filter_model: Type[Model], filter_fields: list[str]):
+    class NewFilter(FilterSet):
+        class Meta:
+            model = filter_model
+            fields = filter_fields
 
-    class Meta:
-        model = Post
-        fields = ['category']
-
-
-class CommentFilter(django_filters.FilterSet):
-    class Meta:
-        model = Comment
-        fields = ['post', 'accepted']
+    return NewFilter

@@ -1,6 +1,6 @@
 from django.views.generic import CreateView, UpdateView, DeleteView
 from django_filters.views import FilterView
-from .filters import PostFilter, CommentFilter
+from .filters import filter_factory
 from .models import Post, Comment
 from .forms import PostForm, CommentForm, CommentAcceptForm
 from django.utils.translation import gettext_lazy as _
@@ -13,9 +13,9 @@ from .mixins import ObjectPermissionRequiredMixin
 
 class PostListView(FilterView):
     template_name = 'post_list.html'
-    filterset_class = PostFilter
     paginate_by = 5
     model = Post
+    filterset_class = filter_factory(model, ['category'])
     ordering = ['-date']
 
     def get_queryset(self):
@@ -26,9 +26,9 @@ class PostListView(FilterView):
 
 class UserPostListView(LoginRequiredMixin, FilterView):
     template_name = 'post_list.html'
-    filterset_class = PostFilter
     paginate_by = 5
     model = Post
+    filterset_class = filter_factory(model, ['category', 'archived'])
     ordering = ['-date']
 
     def get_queryset(self):
@@ -99,9 +99,9 @@ class CommentCreate(SuccessMessageMixin, LoginRequiredMixin, CreateView):
 
 class CommentListView(FilterView):
     template_name = 'reply_list.html'
-    filterset_class = CommentFilter
     paginate_by = 10
     model = Comment
+    filterset_class = filter_factory(model, ['post', 'accepted'])
     ordering = ['post', '-created']
 
     def get_queryset(self):

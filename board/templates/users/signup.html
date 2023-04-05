@@ -2,8 +2,7 @@
 {% load i18n %}
 {% load widget_tweaks %}
 
-{% block title %}
-  {% if not title %}{% trans "Sign in" %}{% else %}{{ title }}{% endif %}
+{% block title %}: {% if not title %}{% trans "Sign in" %}{% else %}{{ title }}{% endif %}
 {% endblock title %}
 
 {% block content %}
