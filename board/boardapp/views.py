@@ -97,7 +97,7 @@ class CommentCreate(SuccessMessageMixin, LoginRequiredMixin, CreateView):
         return context
 
 
-class CommentListView(FilterView):
+class CommentListView(LoginRequiredMixin, FilterView):
     template_name = 'reply_list.html'
     paginate_by = 10
     model = Comment

@@ -73,7 +73,7 @@ class ChangePasswordView(SuccessMessageMixin, PasswordChangeView, LoginRequiredM
         return context
 
 
-class EditProfileView(SuccessMessageMixin, UpdateView, LoginRequiredMixin):
+class EditProfileView(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
     template_name = 'users/signup.html'
     success_message = _('Profile saved.')
     success_url = reverse_lazy('profile')
@@ -90,7 +90,7 @@ class EditProfileView(SuccessMessageMixin, UpdateView, LoginRequiredMixin):
         return context
 
 
-class ProfileView(TemplateView, LoginRequiredMixin):
+class ProfileView(LoginRequiredMixin, TemplateView):
     template_name = 'users/profile.html'
 
     def get_context_data(self, **kwargs):

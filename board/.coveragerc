@@ -1,7 +1,7 @@
 [run]
 source = .
 branch = True
-omit = */tests/*, */migrations/*, board/*
+omit = */tests/*, */migrations/*, board/*, manage.py
 
 [report]
 skip_covered = True
