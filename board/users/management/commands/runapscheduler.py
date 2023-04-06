@@ -6,7 +6,7 @@ from apscheduler.triggers.cron import CronTrigger
 from django.core.management.base import BaseCommand
 from django_apscheduler.jobstores import DjangoJobStore
 from django_apscheduler.models import DjangoJobExecution
-from users.tasks import delete_old
+from users.tasks import delete_old, newsletter
 
 logger = logging.getLogger(__name__)
 
@@ -31,6 +31,15 @@ class Command(BaseCommand):
             replace_existing=True,
         )
         logger.info("Added job 'delete_old'.")
+
+        scheduler.add_job(
+            newsletter,
+            trigger=CronTrigger(hour=12, minute=0, day_of_week='sun'),
+            id="newsletter",
+            max_instances=1,
+            replace_existing=True,
+        )
+        logger.info("Added job 'newsletter'.")
 
         scheduler.add_job(
             delete_old_job_executions,

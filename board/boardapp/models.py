@@ -2,6 +2,7 @@ from django.conf import settings
 from django.db import models
 from tinymce import models as tinymce_models
 from django.utils.translation import gettext_lazy as _
+from django.urls import reverse
 
 
 class Category(models.Model):
@@ -29,6 +30,9 @@ class Post(models.Model):
     class Meta:
         verbose_name = _('Post')
         verbose_name_plural = _('Posts')
+
+    def get_absolute_url(self):
+        return reverse('post_detail', kwargs={'pk': self.pk})
 
 
 class Comment(models.Model):

@@ -1,0 +1,11 @@
+{% extends 'base/base.html' %}
+
+{% block title %}: {{ post.title }}{% endblock title %}
+{% block content %}
+<br>
+<div class="columns is-centered">
+    <div class="column is-half">
+        {% include 'post_card.html' %}
+    </div>
+</div>
+{% endblock content %}

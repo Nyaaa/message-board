@@ -1,4 +1,4 @@
-from django.views.generic import CreateView, UpdateView, DeleteView
+from django.views.generic import CreateView, UpdateView, DeleteView, DetailView
 from django_filters.views import FilterView
 from .filters import filter_factory
 from .models import Post, Comment
@@ -133,3 +133,8 @@ class CommentAccept(SuccessMessageMixin, ObjectPermissionRequiredMixin, UpdateVi
         post.archived = True
         post.save()
         return super(CommentAccept, self).form_valid(form)
+
+
+class PostDetailView(DetailView):
+    model = Post
+    template_name = 'post_detail.html'

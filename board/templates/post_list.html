@@ -1,6 +1,5 @@
 {% extends 'base/base.html' %}
 {% load i18n %}
-{% load custom_filters %}
 
 {% block content %}
 {% include 'base/filter.html' %}
@@ -10,38 +9,7 @@
   <div class="column is-half">
 {% if object_list %}
   {% for post in object_list %}
-    <div class="card mb-5">
-      <header class="card-header">
-        <p class="card-header-title">{{ post.title }}</p>
-      </header>
-      <div class="card-content pb-2">
-        <div class="content">
-          <p>{{ post.text|safe }}</p>
-          <p class="has-text-right is-size-7">{{ post.author }} | {{ post.date }}</p>
-        </div>
-      </div>
-      <footer class="card-footer">
-        {% block card-action %}
-        {% if post.author == user %}
-        <a href="{% url 'replies' %}?post={{ post.pk }}" class="card-footer-item">{% trans "Replies" %}</a>
-        {% if not post.archived %}
-        <a href="{% url 'post_edit' pk=post.pk %}" class="card-footer-item">{% trans "Edit" %}</a>
-        {% else %}
-        <p class="card-footer-item">
-        <span class="tag">{% trans "Archived" %}</span>
-        </p>
-        {% endif %}
-        <a href="{% url 'post_delete' pk=post.pk %}" class="card-footer-item">{% trans "Delete" %}</a>
-        {% else %}
-        <a href="{% url 'reply_create' post=post.pk %}" class="card-footer-item">
-          {% trans "Reply" context "button" %}</a>
-        {% endif %}
-        <a href="?{% url_replace category=post.category.pk %}" class="card-footer-item">
-          <span class="tag">{{ post.category }}</span>
-        </a>
-        {% endblock card-action %}
-      </footer>
-    </div>
+    {% include 'post_card.html' %}
   {% endfor %}
 {% else %}
   <h2>{% trans "Nothing here!" %}</h2>

@@ -1,0 +1,10 @@
+Hi {{ user.username }},
+<br>
+<p>Here are the most popular posts this week:</p>
+<ul>
+    {% for post in posts %}
+    <li>
+        <a href="{{ domain }}{{ post.get_absolute_url }}">{{ post }}</a>
+    </li>
+    {% endfor %}
+</ul>
