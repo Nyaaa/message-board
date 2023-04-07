@@ -104,13 +104,10 @@ class ProfileView(LoginRequiredMixin, TemplateView):
     def post(request):
         if 'timezone' in request.POST:  # NOSONAR python:S1845
             request.session['django_timezone'] = request.POST['timezone']
-        print(request.POST)
         if 'newsletter' in request.POST:
             user = request.user
             newsletter = request.POST['newsletter']
-            print(newsletter)
             if 'on' in newsletter:
-                print(newsletter)
                 user.subscriber = True
             else:
                 user.subscriber = False
