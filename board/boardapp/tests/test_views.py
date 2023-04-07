@@ -7,7 +7,7 @@ from django.urls import reverse
 baker.generators.add('tinymce.models.HTMLField', lambda: '')
 
 
-class ModelTests(TestCase):
+class ViewTests(TestCase):
     @classmethod
     def setUpTestData(cls) -> None:
         baker.make(Post)

@@ -1,11 +1,10 @@
 from django.test import TestCase
-from model_bakery import baker
 from django.contrib.auth import get_user_model
 from django.urls import reverse
 from users.models import Token
 
 
-class ModelTests(TestCase):
+class ViewTests(TestCase):
     @classmethod
     def setUpTestData(cls) -> None:
         cls.user = get_user_model().objects.create_user(username='user1', password='12345')

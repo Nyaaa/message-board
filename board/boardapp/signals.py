@@ -5,6 +5,7 @@ from django.contrib.sites.models import Site
 from django.template.loader import render_to_string
 from django.core.mail import EmailMultiAlternatives
 from .models import Comment
+from django.utils.html import strip_tags
 
 
 @receiver(post_save, sender=Comment)
@@ -20,8 +21,9 @@ def save_trigger(sender, instance, created, **kwargs):
             'reply': instance.text,
             'url': domain + reverse_lazy('reply_accept', kwargs={'pk': instance.pk}),
         })
+        body_plain = strip_tags(body)
         message = EmailMultiAlternatives(subject=subject,
-                                         body='test',
+                                         body=body_plain,
                                          to=(to,))
         message.attach_alternative(body, "text/html")
         message.send()

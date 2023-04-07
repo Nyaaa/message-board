@@ -15,7 +15,7 @@ def get_url(page):
         return reverse(page, args=[1])
 
 
-class ModelTests(TestCase):
+class URLTests(TestCase):
     @classmethod
     def setUpTestData(cls) -> None:
         baker.make(Post)
@@ -45,3 +45,7 @@ class ModelTests(TestCase):
         for page in self.private:
             url = get_url(page)
             self.assertEqual(self.client.get(url).status_code, 200)
+
+    def testPostAbsoluteURL(self):
+        post = baker.make(Post)
+        self.assertEqual(post.get_absolute_url(), reverse('post_detail', args=[post.pk]))
