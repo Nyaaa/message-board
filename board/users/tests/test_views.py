@@ -2,6 +2,7 @@ from django.test import TestCase
 from django.contrib.auth import get_user_model
 from django.urls import reverse
 from users.models import Token
+from django.core import mail
 
 
 class ViewTests(TestCase):
@@ -20,6 +21,13 @@ class ViewTests(TestCase):
                              fetch_redirect_response=True)
         self.assertTrue(user.exists())
         self.assertFalse(user[0].is_active)
+
+    def testMailToken(self):
+        self.client.post(reverse('signup'), data=self.new_user_data)
+        self.assertEqual(len(mail.outbox), 1)
+        user = get_user_model().objects.get(username='user2')
+        token = Token.objects.filter(user=user).values_list('value', flat=True)
+        self.assertTrue(str(*token) in mail.outbox[0].body)
 
     def testTokenCorrect(self):
         self.client.post(reverse('signup'), data=self.new_user_data)

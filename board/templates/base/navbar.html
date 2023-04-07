@@ -1,5 +1,5 @@
 {% load i18n %}
-<nav class="navbar" role="navigation" aria-label="main navigation">
+<nav class="navbar has-background-light" role="navigation" aria-label="main navigation">
   <div class="navbar-brand">
     <a class="navbar-item" href="https://bulma.io">
       <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28">
@@ -14,14 +14,21 @@
 
   <div id="navbarBasicExample" class="navbar-menu">
     <div class="navbar-start">
-      <a href="{% url 'home' %}" class="navbar-item">
+      <a href="{% url 'home' %}"
+         class="navbar-item is-tab {% if request.path == '/' %}is-active{% endif %}">
         {% trans "Home" %}
       </a>
       {% if user.is_authenticated %}
-      <a href="{% url 'user_posts' %}" class="navbar-item">
+      <a href="{% url 'user_posts' %}"
+         class="navbar-item is-tab {% if 'my-posts' in request.path %}is-active{% endif %}">
         {% trans "My posts" %}</a>
-      <a href="{% url 'replies' %}?accepted=false" class="navbar-item">
+      <a href="{% url 'replies' %}?accepted=false"
+         class="navbar-item is-tab {% if 'replies' in request.path %}is-active{% endif %}">
         {% trans "Replies" %}</a>
+      <a href="{% url 'profile' %}"
+         class="navbar-item is-tab {% if 'user' in request.path %}is-active{% endif %}">
+        {% trans "Profile" %}
+      </a>
       {% endif %}
       <div class="navbar-item">
           <p class="control">
@@ -34,9 +41,6 @@
 
 
     <div class="navbar-end">
-      {% if user.is_authenticated %}
-      <p class="navbar-item">{% trans "Hello" %},&nbsp;<a href="{% url 'profile' %}">{{ user }}</a>!</p>
-      {% endif %}
       <!-- Language selector-->
       <div class="navbar-item has-dropdown is-hoverable">
         <a class="navbar-link">
@@ -62,9 +66,9 @@
         <div class="buttons">
           {% if not user.is_authenticated %}
           <a href="{% url 'signup' %}" class="button is-primary"><strong>{% trans "Sign up" %}</strong></a>
-          <a href="{% url 'login' %}" class="button is-light">{% trans "Sign in" %}</a>
+          <a href="{% url 'login' %}" class="button is-primary is-outlined">{% trans "Sign in" %}</a>
           {% else %}
-          <a href="{% url 'logout' %}" class="button is-light">{% trans "Sign out" %}</a>
+          <a href="{% url 'logout' %}" class="button is-link is-outlined">{% trans "Sign out" %}</a>
           {% endif %}
         </div>
       </div>

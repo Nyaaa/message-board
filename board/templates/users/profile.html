@@ -5,10 +5,10 @@
 {% block title %}: {% trans "Profile" %}{% endblock title %}
 {% block content %}
 {% get_current_timezone as TIME_ZONE %}
-<div class="columns is-centered">
+<div class="columns is-centered is-vcentered">
   <div class="column is-half">
-    <nav class="panel">
-      <p class="panel-heading">{% trans "Profile" %}</p>
+    <nav class="panel my-6">
+      <p class="panel-heading">{% trans "Hello" %},&nbsp;{{ user }}!</p>
       <div class="panel-block is-justify-content-space-between">
         <span>{{ current_time|timezone:TIME_ZONE }}</span>
         <form class="select" action="" method="POST">
