@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "message-board"
-version = "0.2.0"
+version = "0.3.0"
 description = ""
 authors = ["Nyaaa <1457047+Nyaaa@users.noreply.github.com>"]
 readme = "README.md"
@@ -14,6 +14,7 @@ django-modeltranslation = "^0.18.9"
 django-widget-tweaks = "^1.4.12"
 django-tinymce = "^3.6.1"
 django-apscheduler = "^0.6.2"
+psycopg2-binary = "^2.9.6"
 
 
 [tool.poetry.group.dev.dependencies]
